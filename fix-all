@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+for x in *.htm? ; do ./fixnames "$x"; done

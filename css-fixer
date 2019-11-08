@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+CSS=discussions-d495dfa078.css
+DIRS=( *_files )
+DIR=${DIRS[0]}
+echo Getting file from $DIR
+cp "$DIR/$CSS" .
+cp $CSS $CSS.fixed
+cat <<EOF>>"$CSS"
+@media print {
+.label {display: none;}
+.pad-box-mini.external {display: none!important;}
+.discussion-read-state-btn {display: none!important;}
+.a.author.external {display: none!important;}
+.toolbarView .headerBar{display: none;}
+.toolbarView#discussion-toolbar+.discussion-entry-reply-area{display:none;}
+.discussion-entry-reply-area{display: none;}
+.discussion-read-state-btn{display: none;}
+.ui-icon {display: none!important;}
+.student_context_card_trigger.external::after {display: none!important;}
+.al-trigger.dim-till-hover.external::after {display: none!important;}
+.entry-controls.hide-if-collapsed {display: none!important;}
+.avatar.external {display: none!important;}
+.author.external::after{display: none!important;}
+.a.external::after{display: none!important;   color: #00f0f0;}
+}
+a:link:after,a:visited:after{content:""!important;font-size:90%}
+EOF

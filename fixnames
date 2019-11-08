@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+# fixnames
+# Jay Pfaffman <jay@pfaffman.com>
+# Available from https://gist.github.com/pfaffman/8644399 (but not this version)
+if [ $# -lt 1 ]
+then
+    echo "Usage " $0 files
+    echo "   Replaces names (or any words) in files passed on the command line."
+    echo "   Edit below to change what names get replaced."
+fi
+
+replace_name_and_pseudonym()
+{
+  pseudonym=$1
+  shift
+  regex="\\(\\b$1\\b"
+  shift
+  while (( "$#" ))
+  do
+    regex+="\\|\\b$1\b"
+    shift
+  done
+  regex+='\)'
+  sed --in-place -e "s/${regex}/${pseudonym}/ig" "${file}"
+  }
+
+for space_file in "$*"
+do
+  echo "doing $space_file"
+  file=$space_file
+  echo "FILE |$file|"
+
+  if [ ! -f "${file}" ]
+  then
+      echo "${file} not a file"
+      exit
+  fi
+  echo -n "Processing " $file ". . . "
+  echo
+  # replace_name_and_pseudonym "pseudonym" "Real Name" "Nickname" "Real" "Name"
+  replace_name_and_pseudonym "INSTRUCTOR" "Pat Doe" "Pat" "Doe" "Professor"
+  echo done!
+done
+exit

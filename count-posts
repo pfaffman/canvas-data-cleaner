@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+grep -c 'data-bind="message"' *.htm > message-count.csv

@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+CSS=discussions-d495dfa078.css
+IFS=$'\n'
+for dir in `find . -type d -name "*_files"`
+do
+  cp -vb "$CSS" "$dir/$CSS"
+done

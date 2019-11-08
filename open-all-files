@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+if [[ $(uname -s) == Linux ]]
+then
+  for x in *.htm; do xdg-open "$x"; sleep 0.25; done
+else
+  for x in *.htm; do open -a "Google Chrome" "$x"; done
+fi
